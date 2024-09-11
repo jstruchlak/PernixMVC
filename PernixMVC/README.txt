@@ -11,3 +11,10 @@
    - ASP.NETCORE is a modern, fast, and cross-platform framework,
      it can run on Windows, macOS, Linux - is much faster and more modular.
 
+
+4. Create db (feature-2/setup-applicationDbContext)
+		- Tools > Nuget Package Manager > Package Manager Console > run 'update-database'
+   Add Tables to db
+		- Data > ApplicationDbContext > Add -> public DbSet<Category> Categories  { get; set; } etc
+		- Tools > Nuget Package Manager > Package Manager Console > run 'add-migration AddCategoryTableToDb'
+		- run 'update-database' again and check db
