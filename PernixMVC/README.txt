@@ -18,3 +18,5 @@
 		- Data > ApplicationDbContext > Add -> public DbSet<Category> Categories  { get; set; } etc
 		- Tools > Nuget Package Manager > Package Manager Console > run 'add-migration AddCategoryTableToDb'
 		- run 'update-database' again and check db
+
+

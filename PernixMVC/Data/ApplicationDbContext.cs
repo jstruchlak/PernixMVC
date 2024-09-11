@@ -11,5 +11,7 @@ namespace PernixMVC.Data
         }
 
         public DbSet<Category> Categories  { get; set; }
+
+
     }
 }
