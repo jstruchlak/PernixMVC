@@ -25,3 +25,9 @@
 		> wwwroot > lib > bootstrap > dist > css > bootstrap.css file
 		
 		- -> https://icons.getbootstrap.com/ copy cdn link and paste in '_Layout'
+
+6. toastr Notifications
+	- -> https://github.com/CodeSeven/toastr
+	- Paste CDN Minified links in '_Layout' (js.cdn) + (css.cdn)
+	- Add TempData to Controller
+	- Add script in '_Notification' shared folder
