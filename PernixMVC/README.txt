@@ -20,3 +20,8 @@
 		- run 'update-database' again and check db
 
 
+5. Bootswatch Theme and Bootstrap Icons
+		- -> https://bootswatch.com/ select theme > download css > paste in
+		> wwwroot > lib > bootstrap > dist > css > bootstrap.css file
+		
+		- -> https://icons.getbootstrap.com/ copy cdn link and paste in '_Layout'
