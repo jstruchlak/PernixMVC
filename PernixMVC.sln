@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PernixMVC", "PernixMVC\PernixMVC.csproj", "{672E28D6-C8C9-4BA0-9142-793E262668F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PernixMVC", "PernixMVC\PernixMVC.csproj", "{672E28D6-C8C9-4BA0-9142-793E262668F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PernixASP.NET_Razor", "PernixASP.NET_Razor\PernixASP.NET_Razor.csproj", "{26EFC5C7-3B17-414B-A4D0-D3BF13A04E65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{672E28D6-C8C9-4BA0-9142-793E262668F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{672E28D6-C8C9-4BA0-9142-793E262668F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{672E28D6-C8C9-4BA0-9142-793E262668F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26EFC5C7-3B17-414B-A4D0-D3BF13A04E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26EFC5C7-3B17-414B-A4D0-D3BF13A04E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26EFC5C7-3B17-414B-A4D0-D3BF13A04E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26EFC5C7-3B17-414B-A4D0-D3BF13A04E65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
