@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace PernixMVC.Migrations
+namespace PernixMVC.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTableToDb : Migration

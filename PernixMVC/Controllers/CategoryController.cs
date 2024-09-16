@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PernixMVC.Data;
+using PernixMVC.DataAccess.Data;
 using PernixMVC.Models;
+
 
 namespace PernixMVC.Controllers
 {
