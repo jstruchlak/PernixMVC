@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PernixMVC.Models;
 
-namespace PernixMVC.Data
+namespace PernixMVC.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

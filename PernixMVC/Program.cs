@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using PernixMVC.Data;
+using PernixMVC.DataAccess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
