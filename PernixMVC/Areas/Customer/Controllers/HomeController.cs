@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using PernixMVC.Models;
 using System.Diagnostics;
 
-namespace PernixMVC.Controllers
+namespace PernixMVC.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
