@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PernixMVC.DataAccess.Data;
 using PernixMVC.DataAccess.Repository.IRepository;
 using PernixMVC.Models;
+using PernixMVC.Models.ViewModels;
 
 
 namespace PernixMVC.Areas.Admin.Controllers
@@ -19,33 +20,51 @@ namespace PernixMVC.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
-                .GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString(),
-                });
+            
             return View(objProductList);
         }
 
         public IActionResult Create()
         {
-            return View();
+          
+            /*ViewBag.CategoryList = CategoryList;*/
+           
+            ProductViewModel productViewModel = new()
+            {
+                CategoryList = _unitOfWork.Category
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                })
+,
+                Product = new Product()
+            };
+            return View(productViewModel);
         }
 
+
         [HttpPost]
-        public IActionResult Create(Product obj)
+        public IActionResult Create(ProductViewModel productVM)
         {
          
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(obj);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "Product created successfully";
                 return RedirectToAction("Index");
+            } else
+            {
+                productVM.CategoryList = _unitOfWork.Category
+               .GetAll().Select(u => new SelectListItem
+               {
+                   Text = u.Name,
+                   Value = u.Id.ToString(),
+               });
+                return View(productVM);
             }
 
-            return View();
         }
 
         public IActionResult Edit(int id)

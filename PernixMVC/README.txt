@@ -31,3 +31,8 @@
 	- Paste CDN Minified links in '_Layout' (js.cdn) + (css.cdn)
 	- Add TempData to Controller
 	- Add script in '_Notification' shared folder
+
+7. ViewBag
+	- ViewBag is a way to pass data from a controller to a view in ASP.NET MVC
+	- It’s like a container: It allows you to send information to the view without
+	having to create a complex model.
