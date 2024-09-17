@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,5 +36,16 @@ namespace PernixMVC.Models
         [Range(1, 1000)]
         public double Price100 { get; set; }
 
+
+
+
+        // Below tells Entity Framework that each Product is linked to a Category.
+        // The CategoryId here connects the Product to its Category in the database.
+        // Entity Framework will set up this connection automatically when creating or updating the database.
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
+        public string ImageUrl { get; set; }
     }
+
 }
