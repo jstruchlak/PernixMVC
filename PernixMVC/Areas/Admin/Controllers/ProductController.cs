@@ -21,7 +21,7 @@ namespace PernixMVC.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includesProperties:"Category").ToList();
 
             return View(objProductList);
         }
@@ -119,19 +119,6 @@ namespace PernixMVC.Areas.Admin.Controllers
 
         }
 
-        public IActionResult Delete(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Product productFromdb = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productFromdb == null)
-            {
-                return NotFound();
-            }
-            return View(productFromdb);
-        }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
@@ -146,5 +133,45 @@ namespace PernixMVC.Areas.Admin.Controllers
             TempData["success"] = "Product deleted successfully";
             return RedirectToAction("Index");
         }
+
+
+
+
+        // API Calls region
+
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll() 
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includesProperties: "Category").ToList();
+            return Json(new { data = objProductList });
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int? id) 
+        {
+            var productToBeDeleted = _unitOfWork.Product.Get(u=>u.Id == id);
+            if (productToBeDeleted == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+
+            var oldImagePath =
+                            Path.Combine(_webHostEnvironment.WebRootPath,
+                            productToBeDeleted.ImageUrl.TrimStart('\\'));
+
+            if (System.IO.File.Exists(oldImagePath))
+            {
+                System.IO.File.Delete(oldImagePath);
+            }
+
+            _unitOfWork.Product.Remove(productToBeDeleted);
+            _unitOfWork.Save();
+
+           
+            return Json(new { success = true, message = "Delete Successful" });
+        }
+
+        #endregion
     }
 }

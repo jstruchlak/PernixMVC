@@ -36,3 +36,12 @@
 	- ViewBag is a way to pass data from a controller to a view in ASP.NET MVC
 	- It’s like a container: It allows you to send information to the view without
 	having to create a complex model.
+
+
+/////////////////////////////////////////////////////////////////////////////////
+THIRD PARTY PLUGINS - CDN
+/////////////////////////////////////////////////////////////////////////////////
+1.	Toastr (notifications) -> https://github.com/CodeSeven/toastr
+2.	TinyMCE (pre-built text editor) -> https://www.tiny.cloud/
+3.	DataTables (DataTable library JS-HTML) -> https://datatables.net/
+4.	Sweet Alerts (Popup box library) -> https://sweetalert2.github.io/
