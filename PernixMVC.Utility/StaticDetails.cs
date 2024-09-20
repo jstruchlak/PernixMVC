@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace PernixMVC.Utility
 {
-    internal class StaticDetails
+    public static class StaticDetails
     {
+        // Adding roles to app
+        public const string Role_Customer = "Customer";
+        public const string Role_Company = "Company";
+        public const string Role_Admin = "Admin";
+        public const string Role_Employee = "Employee";
     }
 }
