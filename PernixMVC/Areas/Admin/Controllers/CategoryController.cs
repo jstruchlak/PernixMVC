@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PernixMVC.DataAccess.Data;
 using PernixMVC.DataAccess.Repository.IRepository;
 using PernixMVC.Models;
+using PernixMVC.Utility;
 
 
 namespace PernixMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin )]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
