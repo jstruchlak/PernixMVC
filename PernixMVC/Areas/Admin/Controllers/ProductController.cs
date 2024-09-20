@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PernixMVC.DataAccess.Data;
 using PernixMVC.DataAccess.Repository.IRepository;
 using PernixMVC.Models;
 using PernixMVC.Models.ViewModels;
+using PernixMVC.Utility;
 
 
 namespace PernixMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
