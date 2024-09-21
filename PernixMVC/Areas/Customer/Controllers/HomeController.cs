@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using PernixMVC.Models;
 using System.Diagnostics;
 using PernixMVC.DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 
 namespace PernixMVC.Areas.Customer.Controllers
@@ -24,13 +26,45 @@ namespace PernixMVC.Areas.Customer.Controllers
        
         }
 
-        public IActionResult Details(int? productId)
+        public IActionResult Details(int productId)
         {
-            Product product = _unitOfWork.Product.Get(u=>u.Id==productId,includeProperties: "Category");
-            return View(product);
-
+            ShoppingCart cart = new()
+            {
+                Product = _unitOfWork.Product.Get(u => u.Id == productId, includeProperties: "Category"),
+                Count = 1,
+                ProductId = productId
+            };
+            return View(cart);
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            // userId for unique user adding to cart
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCart.ApplicationUserId = userId;
+
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
+            u.ProductId == shoppingCart.ProductId);
+
+            // check if shopping cart with matching id exists
+            if (cartFromDb != null) {
+                // shopping cart exists - Update
+                cartFromDb.Count += shoppingCart.Count;
+                _unitOfWork.ShoppingCart.Update(cartFromDb);
+            } else
+            {
+                // add cart record - New
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+            }
+
+            TempData["success"] = "Cart updated successfully";
+            _unitOfWork.Save();
+
+           return RedirectToAction(nameof(Index));
+        }
         public IActionResult Privacy()
         {
             return View();
