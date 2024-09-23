@@ -37,6 +37,16 @@
 	- It’s like a container: It allows you to send information to the view without
 	having to create a complex model.
 
+8. Scaffold Identity
+	- User Management: Handles creation, updating, and deletion of user accounts.
+	- Authentication: Provides login and logout functionality, including support for external providers (Google, Facebook, etc.).
+	- Authorization: Manages roles and claims to control access to resources.
+	- Password Management: Supports password hashing, validation, reset, and recovery features.
+	- Security: Implements features like two-factor authentication (2FA) and account lockout to enhance security.
+    - Data Storage: Utilizes Entity Framework to store user-related data in a database (SQL by default).
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////
 THIRD PARTY PLUGINS - CDN
@@ -45,3 +55,9 @@ THIRD PARTY PLUGINS - CDN
 2.	TinyMCE (pre-built text editor) -> https://www.tiny.cloud/
 3.	DataTables (DataTable library JS-HTML) -> https://datatables.net/
 4.	Sweet Alerts (Popup box library) -> https://sweetalert2.github.io/
+
+
+
+/////////////////////////////////////////////////////////////////////////////////
+ASP.NET IDENTITY - Login / Registration / Authenticaton / Password Hashing / Validation
+/////////////////////////////////////////////////////////////////////////////////
