@@ -4,6 +4,7 @@ using PernixMVC.DataAccess.Repository.IRepository;
 using PernixMVC.Models;
 using PernixMVC.Models.ViewModels;
 using System.Security.Claims;
+using PernixMVC.Utility;
 
 namespace PernixMVC.Areas.Customer.Controllers
 {
@@ -13,6 +14,7 @@ namespace PernixMVC.Areas.Customer.Controllers
 	{
 
 		private readonly IUnitOfWork _unitOfWork;
+		[BindProperty]
 		public ShoppingCartViewModel ShoppingCartViewModel { get; set; }
 		public CartController(IUnitOfWork unitOfWork)
 		{
@@ -72,6 +74,67 @@ namespace PernixMVC.Areas.Customer.Controllers
 			}
 			return View(ShoppingCartViewModel);
 		}
+		[HttpPost]
+		[ActionName("Summary")]
+		public IActionResult SummaryPOST()
+		{
+			var claimsIdentity = (ClaimsIdentity)User.Identity;
+			var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+			ShoppingCartViewModel.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId,
+				includeProperties: "Product");
+			ShoppingCartViewModel.OrderHeader.OrderDate = System.DateTime.Now;
+			ShoppingCartViewModel.OrderHeader.ApplicationUserId = userId;
+
+			ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+
+
+			foreach (var cart in ShoppingCartViewModel.ShoppingCartList)
+			{
+				cart.Price = GetPriceBasedOnQuantity(cart);
+				ShoppingCartViewModel.OrderHeader.OrderTotal += (cart.Price * cart.Count);
+			}
+			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+			{
+				//it is a regular customer account and we need to capture payment
+				ShoppingCartViewModel.OrderHeader.PaymentStatus = StaticDetails.PaymentStatusPending;
+				ShoppingCartViewModel.OrderHeader.OrderStatus = StaticDetails.StatusPending;
+			}
+			else
+			{
+				//it is a company user
+				ShoppingCartViewModel.OrderHeader.PaymentStatus = StaticDetails.PaymentStatusDelayedPayment;
+				ShoppingCartViewModel.OrderHeader.OrderStatus = StaticDetails.StatusApproved;
+			}
+			_unitOfWork.OrderHeader.Add(ShoppingCartViewModel.OrderHeader);
+			_unitOfWork.Save();
+			foreach (var cart in ShoppingCartViewModel.ShoppingCartList)
+			{
+				OrderDetail orderDetail = new()
+				{
+					ProductId = cart.ProductId,
+					OrderHeaderId = ShoppingCartViewModel.OrderHeader.Id,
+					Price = cart.Price,
+					Count = cart.Count
+				};
+				_unitOfWork.OrderDetail.Add(orderDetail);
+				_unitOfWork.Save();
+			}
+
+			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+			{
+				//it is a regular customer account and we need to capture payment
+				// stripe logic
+			}
+
+			return RedirectToAction(nameof(OrderConfirmation), new { id = ShoppingCartViewModel.OrderHeader.Id });
+		}
+
+
+		public IActionResult OrderConfirmation(int id)
+		{
+			return View(id);
+		}
+
 
 		public IActionResult Plus(int cartId)
 		{
