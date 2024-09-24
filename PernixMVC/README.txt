@@ -49,12 +49,13 @@
 
 
 /////////////////////////////////////////////////////////////////////////////////
-THIRD PARTY PLUGINS - CDN
+THIRD PARTY PLUGINS - CDN + Integrations
 /////////////////////////////////////////////////////////////////////////////////
 1.	Toastr (notifications) -> https://github.com/CodeSeven/toastr
 2.	TinyMCE (pre-built text editor) -> https://www.tiny.cloud/
 3.	DataTables (DataTable library JS-HTML) -> https://datatables.net/
 4.	Sweet Alerts (Popup box library) -> https://sweetalert2.github.io/
+5. Stripe (Payment integration) -> https://dashboard.stripe.com/test
 
 
 
