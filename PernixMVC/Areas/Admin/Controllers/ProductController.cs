@@ -64,7 +64,7 @@ namespace PernixMVC.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult Upsert(ProductViewModel productVM, IFormFile? file)
+        public IActionResult Upsert(ProductViewModel productViewModel, IFormFile? file)
         {
 
             if (ModelState.IsValid)
@@ -75,11 +75,11 @@ namespace PernixMVC.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string productPath = Path.Combine(wwwRootPath, @"images\product");
 
-                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                    if (!string.IsNullOrEmpty(productViewModel.Product.ImageUrl))
                     {
                         // delete the old image
                         var oldImagePath =
-                            Path.Combine(wwwRootPath, productVM.Product.ImageUrl.TrimStart('\\'));
+                            Path.Combine(wwwRootPath, productViewModel.Product.ImageUrl.TrimStart('\\'));
 
                         if (System.IO.File.Exists(oldImagePath))
                         {
@@ -92,16 +92,16 @@ namespace PernixMVC.Areas.Admin.Controllers
                         file.CopyTo(fileStream);
                     }
 
-                    productVM.Product.ImageUrl = @"\images\product\" + fileName;
+                    productViewModel.Product.ImageUrl = @"\images\product\" + fileName;
                 }
 
-                if (productVM.Product.Id == 0)
+                if (productViewModel.Product.Id == 0)
                 {
-                    _unitOfWork.Product.Add(productVM.Product);
+                    _unitOfWork.Product.Add(productViewModel.Product);
                 }
                 else
                 {
-                    _unitOfWork.Product.Update(productVM.Product);
+                    _unitOfWork.Product.Update(productViewModel.Product);
                 }
 
 
@@ -111,13 +111,13 @@ namespace PernixMVC.Areas.Admin.Controllers
             }
             else
             {
-                productVM.CategoryList = _unitOfWork.Category
+                productViewModel.CategoryList = _unitOfWork.Category
                .GetAll().Select(u => new SelectListItem
                {
                    Text = u.Name,
                    Value = u.Id.ToString(),
                });
-                return View(productVM);
+                return View(productViewModel);
             }
 
         }
