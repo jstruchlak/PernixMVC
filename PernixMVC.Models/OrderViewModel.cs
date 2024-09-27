@@ -9,6 +9,6 @@ namespace PernixMVC.Models
     public class OrderViewModel
     {
         public OrderHeader OrderHeader { get; set; }
-        public IEnumerable<OrderDetail> orderDetail { get; set; }
+        public IEnumerable<OrderDetail> OrderDetail { get; set; }
     }
 }
