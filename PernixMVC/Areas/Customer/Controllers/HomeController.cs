@@ -4,6 +4,8 @@ using System.Diagnostics;
 using PernixMVC.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using PernixMVC.Utility;
+using Microsoft.AspNetCore.Http;
 
 
 namespace PernixMVC.Areas.Customer.Controllers
@@ -18,9 +20,19 @@ namespace PernixMVC.Areas.Customer.Controllers
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
+       
 
         public IActionResult Index()
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (claim != null)
+            {
+                HttpContext.Session.SetInt32(StaticDetails.SessionCart,
+                _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).Count());
+            }
+
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return View(productList);
        
@@ -54,10 +66,14 @@ namespace PernixMVC.Areas.Customer.Controllers
                 // shopping cart exists - Update
                 cartFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
+                _unitOfWork.Save();
             } else
             {
                 // add cart record - New
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(StaticDetails.SessionCart,
+                    _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
             }
 
             TempData["success"] = "Cart updated successfully";
