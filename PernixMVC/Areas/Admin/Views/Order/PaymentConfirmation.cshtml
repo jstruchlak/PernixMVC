@@ -1,0 +1,23 @@
+﻿@model int
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h1 class="text-success fw-bold display-4 mb-3">Payment Successfully!</h1>
+            <p class="lead text-muted">Order Number: <span class="fw-bold text-dark">@Model</span></p>
+        </div>
+        <div class="col-10 text-center">
+            <img src="~/images/PNX-MVC.png" class="img-fluid rounded shadow-lg" alt="Order Success Image" />
+        </div>
+        <div class="col-12 text-center mt-4">
+            <p class="h5 text-primary fw-bold">Payment has been applied successfully!</p>
+            <a asp-action="Admin"
+            asp-controller="Order" 
+            asp-action="details" 
+            asp-route-orderId="@Model" class="btn btn-primary">Back to Order Details</a>
+        </div>
+        <div class="col-12 text-center mt-4">
+            <a href="/" class="btn btn-primary btn-lg shadow-sm px-5 py-2">Continue Shopping</a>
+        </div>
+
+    </div>
+</div>
