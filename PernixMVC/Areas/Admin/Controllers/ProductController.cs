@@ -11,7 +11,7 @@ using PernixMVC.Utility;
 namespace PernixMVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-   /* [Authorize(Roles = StaticDetails.Role_Admin)]*/
+    [Authorize(Roles = StaticDetails.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
