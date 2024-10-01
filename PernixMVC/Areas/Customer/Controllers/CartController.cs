@@ -6,6 +6,9 @@ using PernixMVC.Models.ViewModels;
 using System.Security.Claims;
 using PernixMVC.Utility;
 using Stripe.Checkout;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Stripe.Climate;
 
 namespace PernixMVC.Areas.Customer.Controllers
 {
@@ -13,13 +16,14 @@ namespace PernixMVC.Areas.Customer.Controllers
 	[Authorize]
 	public class CartController : Controller
 	{
-
+		private readonly IEmailSender _emailSender;
 		private readonly IUnitOfWork _unitOfWork;
 		[BindProperty]
 		public ShoppingCartViewModel ShoppingCartViewModel { get; set; }
-		public CartController(IUnitOfWork unitOfWork)
+		public CartController(IUnitOfWork unitOfWork, IEmailSender emailSender)
 		{
 			_unitOfWork = unitOfWork;
+			_emailSender = emailSender;
 		}
 
 
@@ -182,6 +186,12 @@ namespace PernixMVC.Areas.Customer.Controllers
 				// clear the cart session after success
 				HttpContext.Session.Clear();
             }
+
+
+			// sendGrid new order
+			_emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - PernixMVC",
+				$"<p>New Order Created - {orderHeader.Id}</p>");
+
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
                 .GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
             _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);

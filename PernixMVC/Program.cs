@@ -42,6 +42,8 @@ builder.Services.AddSession(options =>
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// sendgrid
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 
