@@ -58,6 +58,8 @@ THIRD PARTY PLUGINS - CDN + Integrations
 5.  Stripe (Payment integration) -> https://dashboard.stripe.com/test
 6.  Icons Bootstrap -> https://icons.getbootstrap.com/
 7.	Facebook Login -> https://developers.facebook.com/ (My Apps > Create App > Other > Consumer > App name: > Facebook Login Setup > WWW )
+8.	SendGrid (send emails in the project) -> https://sendgrid.com/en-us (business domain name preffered e.g. info@pernixmvc.com)
+	a.Verify domain > Settings > API Keys > Create Name > Full Access > Create & View > Paste in appsettings.json ("SecretKey")
 
 
 /////////////////////////////////////////////////////////////////////////////////
