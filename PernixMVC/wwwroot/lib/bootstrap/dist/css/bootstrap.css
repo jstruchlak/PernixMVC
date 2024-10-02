@@ -6049,7 +6049,7 @@ textarea.form-control-lg {
 }
 
     .toast.showing {
-        opacity: 0;
+        opacity: 1;
     }
 
     .toast:not(.show) {
