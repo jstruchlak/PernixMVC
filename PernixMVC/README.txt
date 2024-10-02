@@ -1,4 +1,8 @@
-﻿1.	.NET Framework is the engine for building apps (mainly on Windows).
+﻿/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ASP.NET IDENTITY - Login / Registration / Authenticaton / Password Hashing / Validation
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+1.	.NET Framework is the engine for building apps (mainly on Windows).
 
 2.	Entity Framework is like the GPS that helps you navigate your database easily.
 
@@ -38,11 +42,10 @@
     - Data Storage: Utilizes Entity Framework to store user-related data in a database (SQL by default).
 
 
-
-
 /////////////////////////////////////////////////////////////////////////////////
 THIRD PARTY PLUGINS - CDN - INTERGRATIONS - DEPLOYMENT
 /////////////////////////////////////////////////////////////////////////////////
+
 1.	Toastr (notifications) -> https://github.com/CodeSeven/toastr
 2.	TinyMCE (pre-built text editor) -> https://www.tiny.cloud/
 3.	DataTables (DataTable library JS-HTML) -> https://datatables.net/
@@ -65,6 +68,3 @@ THIRD PARTY PLUGINS - CDN - INTERGRATIONS - DEPLOYMENT
 		g.	Stripe Logic will have to be altered in Controllers (CartController + OrderController) from localhost to dynamic solution -> [var domain = Request.Scheme + "://" + Request.Host.Value + "/";]
 		h.	Facebook Meta Developers will also need to be updated for registartion (Redirect URI from localhost to Azure Production URL)
 
-/////////////////////////////////////////////////////////////////////////////////
-ASP.NET IDENTITY - Login / Registration / Authenticaton / Password Hashing / Validation
-/////////////////////////////////////////////////////////////////////////////////

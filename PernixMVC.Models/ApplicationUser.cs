@@ -12,6 +12,7 @@ namespace PernixMVC.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        /*adding custom fields to ASP-Identity*/
         [Required]
         public string Name { get; set; }
         public string? StreetAddress { get; set; }
@@ -23,6 +24,8 @@ namespace PernixMVC.Models
         public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [ValidateNever]
-        public Company Company { get; set; }
+        public Company? Company { get; set; }
+        [NotMapped]
+        public string Role { get; set; }
     }
 }
