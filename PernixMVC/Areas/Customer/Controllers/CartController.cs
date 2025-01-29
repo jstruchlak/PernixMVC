@@ -189,7 +189,7 @@ namespace PernixMVC.Areas.Customer.Controllers
 
 
 			// sendGrid new order
-			_emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - PernixMVC",
+			_emailSender.SendEmailAsync(orderHeader.ApplicationUser.Email, "New Order - Pernix Shelf Life",
 				$"<p>New Order Created - {orderHeader.Id}</p>");
 
             List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
