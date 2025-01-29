@@ -23,7 +23,7 @@ namespace PernixMVC.Utility
         {
             var client = new SendGridClient(SendGridSecret);
             
-            var from = new EmailAddress("joeys@pernix.com.au", "Pernix-MVC");
+            var from = new EmailAddress("joeys@pernix.com.au", "Pernix Shelf Life");
             var to = new EmailAddress(email);
             var message = MailHelper.CreateSingleEmail(from, to, subject, "", htmlMessage);
 

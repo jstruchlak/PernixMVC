@@ -25,15 +25,15 @@ namespace PernixMVC.Models
         [Range(1, 1000)]
         public double ListPrice { get; set; }
         [Required]
-        [Display(Name = "Price $1-50")]
+        [Display(Name = "Price (if a purchase is between 1-50)")]
         [Range(1, 1000)]
         public double Price { get; set; }
         [Required]
-        [Display(Name = "Price for $50+")]
+        [Display(Name = "Price (if a purchase is between 51-100)")]
         [Range(1, 1000)]
         public double Price50 { get; set; }
         [Required]
-        [Display(Name = "Price for $100+")]
+        [Display(Name = "Price (if a purchase 100+)")]
         [Range(1, 1000)]
         public double Price100 { get; set; }
 

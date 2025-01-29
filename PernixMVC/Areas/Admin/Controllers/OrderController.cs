@@ -223,7 +223,7 @@ namespace PernixMVC.Areas.Admin.Controllers
             switch (status)
             {
                 case "pending":
-                    objOrderHeaders = objOrderHeaders.Where(u => u.PaymentStatus == StaticDetails.PaymentStatusDelayedPayment);
+                    objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == StaticDetails.PaymentStatusPending);
                     break;
                 case "inprogress":
                     objOrderHeaders = objOrderHeaders.Where(u => u.OrderStatus == StaticDetails.StatusInProgress);

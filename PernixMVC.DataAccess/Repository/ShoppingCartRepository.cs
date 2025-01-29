@@ -12,6 +12,7 @@ namespace PernixMVC.DataAccess.Repository
 {
     public class ShoppingCartRepository : Repository<ShoppingCart>, IShoppingCartRepository
     {
+        // Entity Framework Core constructor
         private ApplicationDbContext _db;
         public ShoppingCartRepository(ApplicationDbContext db) : base(db)
         {
